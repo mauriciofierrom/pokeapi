@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveGeneric     #-}
 
-module PokemonType.Types where
+module PokeApi.Type.Types where
 
 import Data.Aeson ((.:), parseJSON, FromJSON, withObject)
 import GHC.Generics (Generic)
