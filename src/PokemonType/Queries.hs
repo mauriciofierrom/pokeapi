@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Type.Queries
+module PokemonType.Queries
   ( effectiveAgainst
   , isEffectiveAgainst
   , isWeakAgainst
@@ -14,8 +14,8 @@ import Servant.Client
 
 import qualified Data.Text as T
 
-import Type.Types
-import Type.Api
+import PokemonType.Types
+import PokemonType.Api
 
 
 -- |Returns a list of 'Type's the criteria is strong against

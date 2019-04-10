@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 
-module Type.Api where
+module PokemonType.Api where
 
 import Data.Proxy (Proxy(..))
 import Servant.API ((:>), Capture, Get, JSON)
@@ -9,7 +9,7 @@ import Servant.Client (client, ClientM)
 
 import qualified Data.Text as T
 
-import Type.Types
+import PokemonType.Types
 
 type API = "type" :> Capture "name" T.Text :> Get '[JSON] PokemonType
 
