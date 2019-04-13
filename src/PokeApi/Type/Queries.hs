@@ -28,29 +28,32 @@ weakAgainst :: Manager -> Type' -> PokeApi [Type']
 weakAgainst = genDamageRelationAccessor doubleDamageFrom
 
 -- |Wether the criteria is weak against the given 'Type'
-isWeakAgainst :: Manager -> Type' -> Type' -> IO (Either ServantError Bool)
+isWeakAgainst :: Manager -> Type' -> Type' -> PokeApi Bool
 isWeakAgainst manager' typeCriteria typeCriteria' = do
   doubleDamagers <- weakAgainst manager' typeCriteria
   return $ elem typeCriteria' <$> doubleDamagers
 
 -- |Wether the criteria is effective against the given 'Type'
-isEffectiveAgainst :: Manager -> Type' -> Type' -> IO (Either ServantError Bool)
+isEffectiveAgainst :: Manager -> Type' -> Type' -> PokeApi Bool
 isEffectiveAgainst manager' typeCriteria typeCriteria' = do
   doubleDamagers <- effectiveAgainst manager' typeCriteria
   return $ elem typeCriteria' <$> doubleDamagers
 
-pokemonType :: Manager -> Type' -> IO (Either ServantError PokemonType)
+pokemonType :: Manager -> Type' -> PokeApi PokemonType
 pokemonType manager' type'' =
   let baseUrl = BaseUrl Https "pokeapi.co" 443 "/api/v2"
       clientEnv = mkClientEnv manager' baseUrl
    in runClientM (type' $ getTypeName type'') clientEnv
 
-damageRelations :: Manager -> Type' -> IO (Either ServantError DamageRelation)
+damageRelations :: Manager -> Type' -> PokeApi DamageRelation
 damageRelations manager' type'' = do
   leType <- pokemonType manager' type''
   return $ fmap typeDamageRelations leType
 
-genDamageRelationAccessor :: (DamageRelation -> [TypeResource]) -> Manager -> Type' -> IO (Either ServantError [Type'])
+genDamageRelationAccessor :: (DamageRelation -> [TypeResource])
+                          -> Manager
+                          -> Type'
+                          -> PokeApi [Type']
 genDamageRelationAccessor f manager' type'' = do
   leDamageRelations <- damageRelations manager' type''
   case leDamageRelations of
