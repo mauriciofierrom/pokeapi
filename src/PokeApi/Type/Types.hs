@@ -87,22 +87,24 @@ getTypeName Fairy = "fairy"
 
 
 getType :: T.Text -> Maybe Type'
-getType "normal" = Just Normal
-getType "fire" = Just Fire
-getType "grass" = Just Grass
-getType "water" = Just Water
-getType "electric" = Just Electric
-getType "ice" = Just Ice
-getType "fighting" = Just Fighting
-getType "poison" = Just Poison
-getType "ground" = Just Ground
-getType "flying" = Just Flying
-getType "psychic" = Just Psychic
-getType "bug" = Just Bug
-getType "rock" = Just Rock
-getType "ghost" = Just Ghost
-getType "dragon" = Just Dragon
-getType "dark" = Just Dark
-getType "steel" = Just Steel
-getType "fairy" = Just Fairy
-getType _ = Nothing
+getType type' =
+  case T.toLower type' of
+    "normal" -> Just Normal
+    "fire" -> Just Fire
+    "grass" -> Just Grass
+    "water" -> Just Water
+    "electric" -> Just Electric
+    "ice" -> Just Ice
+    "fighting" -> Just Fighting
+    "poison" -> Just Poison
+    "ground" -> Just Ground
+    "flying" -> Just Flying
+    "psychic" -> Just Psychic
+    "bug" -> Just Bug
+    "rock" -> Just Rock
+    "ghost" -> Just Ghost
+    "dragon" -> Just Dragon
+    "dark" -> Just Dark
+    "steel" -> Just Steel
+    "fairy" -> Just Fairy
+    _ -> Nothing
