@@ -68,6 +68,7 @@ data Type' = Normal
 getTypeName :: Type' -> T.Text
 getTypeName Normal = "normal"
 getTypeName Fire = "fire"
+getTypeName Grass = "grass"
 getTypeName Water = "water"
 getTypeName Electric = "electric"
 getTypeName Ice = "ice"
@@ -88,6 +89,7 @@ getTypeName Fairy = "fairy"
 getType :: T.Text -> Maybe Type'
 getType "normal" = Just Normal
 getType "fire" = Just Fire
+getType "grass" = Just Grass
 getType "water" = Just Water
 getType "electric" = Just Electric
 getType "ice" = Just Ice
