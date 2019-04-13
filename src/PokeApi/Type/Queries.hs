@@ -14,16 +14,17 @@ import Servant.Client
 
 import qualified Data.Text as T
 
+import PokeApi.Types
 import PokeApi.Type.Types
 import PokeApi.Type.Api
 
 
 -- |Returns a list of 'Type's the criteria is strong against
-effectiveAgainst :: Manager -> Type' -> IO (Either ServantError [Type'])
+effectiveAgainst :: Manager -> Type' -> PokeApi [Type']
 effectiveAgainst = genDamageRelationAccessor doubleDamageTo
 
 -- |Returns a list of 'Type's the criteria is weak against
-weakAgainst :: Manager -> Type' -> IO (Either ServantError [Type'])
+weakAgainst :: Manager -> Type' -> PokeApi [Type']
 weakAgainst = genDamageRelationAccessor doubleDamageFrom
 
 -- |Wether the criteria is weak against the given 'Type'
