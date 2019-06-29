@@ -6,6 +6,8 @@ module PokeApi.Resource.Types where
 import Data.Aeson (FromJSON)
 import GHC.Generics
 
+import PokeApi.LocationArea.Types
+
 data Resource =
   Resource { name :: String
            , url :: String
@@ -21,3 +23,10 @@ data PokemonResource =
                   } deriving (Eq, Show, Generic)
 
 instance FromJSON PokemonResource
+
+data EncounterResource =
+  EncounterResource { locationArea :: LocationArea
+                    , versionDetails :: [Resource]
+                    } deriving (Eq, Show, Generic)
+
+instance FromJSON EncounterResource

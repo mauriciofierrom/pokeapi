@@ -3,7 +3,9 @@
 
 module PokeApi.Resource.Api
   ( pokemonResource
-  , pokemonEncounter ) where
+  , pokemonEncounterById
+  , pokemonEncounterByName
+  ) where
 
 import Data.Proxy (Proxy(..))
 import Servant.API -- ((:>), :<|>, Capture, Get, JSON, QueryParam)
@@ -12,12 +14,14 @@ import Servant.Client (client, ClientM)
 import PokeApi.Resource.Types
 
 type API = "pokemon" :> QueryParam "offset" Int :> QueryParam "limit" Int :> Get '[JSON] PokemonResource
-  :<|> "pokemon" :> Capture "id" String :> Get '[JSON] [Resource]
+  :<|> "pokemon" :> Capture "name" String :> "encounters" :> Get '[JSON] [EncounterResource]
+  :<|> "pokemon" :> Capture "id" Int :> "encounters" :> Get '[JSON] [EncounterResource]
 
 pokemonResource :: Maybe Int -> Maybe Int -> ClientM PokemonResource
-pokemonEncounter :: String -> ClientM [Resource]
+pokemonEncounterByName :: String -> ClientM [EncounterResource]
+pokemonEncounterById :: Int -> ClientM [EncounterResource]
 
 api :: Proxy API
 api = Proxy
 
-pokemonResource :<|> pokemonEncounter = client api
+pokemonResource :<|> pokemonEncounterByName :<|> pokemonEncounterById = client api
