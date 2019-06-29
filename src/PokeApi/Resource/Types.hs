@@ -1,9 +1,10 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module PokeApi.Resource.Types where
 
-import Data.Aeson (FromJSON)
+import Data.Aeson (FromJSON, parseJSON, withObject, (.:))
 import GHC.Generics
 
 import PokeApi.LocationArea.Types
@@ -24,9 +25,22 @@ data PokemonResource =
 
 instance FromJSON PokemonResource
 
+
+data VersionEncounterDetail =
+  VersionEncounterDetail { vedVersion :: Resource
+                         , vedMaxChance :: Int
+                         -- , vedEncounterDetails :: [Encounter]
+                         } deriving (Eq, Show)
+
+instance FromJSON VersionEncounterDetail where
+  parseJSON = withObject "version_details" $ \ved -> do
+    vedVersion <- ved .: "version"
+    vedMaxChance <- ved .: "max_chance"
+    return VersionEncounterDetail{..}
+
 data EncounterResource =
   EncounterResource { locationArea :: LocationArea
-                    , versionDetails :: [Resource]
+                    , versionDetails :: [VersionEncounterDetail]
                     } deriving (Eq, Show, Generic)
 
 instance FromJSON EncounterResource
