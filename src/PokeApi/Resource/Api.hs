@@ -4,16 +4,14 @@
 module PokeApi.Resource.Api (pokemonResource) where
 
 import Data.Proxy (Proxy(..))
-import Servant.API ((:>), Capture, Get, JSON)
+import Servant.API ((:>), Get, JSON, QueryParam)
 import Servant.Client (client, ClientM)
-
-import qualified Data.Text as T
 
 import PokeApi.Resource.Types
 
-type API = "type" :> Get '[JSON] PokemonResource
+type API = "pokemon" :> QueryParam "offset" Int :> QueryParam "limit" Int :> Get '[JSON] PokemonResource
 
-pokemonResource :: ClientM PokemonResource
+pokemonResource :: Maybe Int -> Maybe Int -> ClientM PokemonResource
 
 api :: Proxy API
 api = Proxy

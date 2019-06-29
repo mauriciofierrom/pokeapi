@@ -3,7 +3,7 @@
 
 module PokeApi.Resource.Types where
 
-import Data.Aeson ((.:), parseJSON, FromJSON, withObject)
+import Data.Aeson (FromJSON)
 import GHC.Generics
 
 data Resource =
@@ -15,8 +15,8 @@ instance FromJSON Resource
 
 data PokemonResource =
   PokemonResource { count :: Int
-                  , next :: String
-                  , previous :: String
+                  , next :: Maybe String
+                  , previous :: Maybe String
                   , results :: [Resource]
                   } deriving (Eq, Show, Generic)
 
