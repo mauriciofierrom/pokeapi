@@ -13,6 +13,7 @@ import qualified Data.Text as T
 import PokeApi.Type.Types
 import PokeApi.Resource.Api
 import PokeApi.Resource.Types
+import PokeApi.Pokemon.Queries
 
 import Network.URL
 

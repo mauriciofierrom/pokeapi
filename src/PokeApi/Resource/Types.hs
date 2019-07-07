@@ -39,8 +39,12 @@ instance FromJSON VersionEncounterDetail where
     return VersionEncounterDetail{..}
 
 data EncounterResource =
-  EncounterResource { locationArea :: LocationArea
+  EncounterResource { locationArea :: Resource
                     , versionDetails :: [VersionEncounterDetail]
                     } deriving (Eq, Show, Generic)
 
-instance FromJSON EncounterResource
+instance FromJSON EncounterResource where
+  parseJSON = withObject "encounter_resource" $ \er -> do
+    locationArea <- er .: "location_area"
+    versionDetails <- er .: "version_details"
+    return EncounterResource{..}
