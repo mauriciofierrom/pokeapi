@@ -14,11 +14,11 @@ import PokeApi.Resource.Api
 import PokeApi.Version.Types
 import PokeApi.LocationArea.Types
 
-pokemonEncounters :: ClientEnv -> Pokemon -> PokeApi [EncounterResource]
-pokemonEncounters env Pokemon{pkmnName} = runClientM (pokemonEncounterByName pkmnName) env
+pokemonEncounters :: ClientEnv -> String -> PokeApi [EncounterResource]
+pokemonEncounters env pkmnName = runClientM (pokemonEncounterByName pkmnName) env
 
-pokemonEncounterByGame :: ClientEnv -> Pokemon -> Version -> PokeApi [String]
-pokemonEncounterByGame env pkmn@Pokemon{pkmnName} Version{versionName} =
+pokemonEncounterByGame :: ClientEnv -> String -> String -> PokeApi [String]
+pokemonEncounterByGame env pkmnName versionName =
   pokemonEncounters env pkmn >>= \case
     Left err -> return (Left err)
     Right encounters -> do
