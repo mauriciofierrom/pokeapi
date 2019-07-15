@@ -19,7 +19,7 @@ pokemonEncounters env pkmnName = runClientM (pokemonEncounterByName pkmnName) en
 
 pokemonEncounterByGame :: ClientEnv -> String -> String -> PokeApi [String]
 pokemonEncounterByGame env pkmnName versionName =
-  pokemonEncounters env pkmn >>= \case
+  pokemonEncounters env pkmnName >>= \case
     Left err -> return (Left err)
     Right encounters -> do
       let byGame = filter (\x -> elem versionName (fmap (PokeApi.Resource.Types.name . vedVersion)  (versionDetails x))) encounters
