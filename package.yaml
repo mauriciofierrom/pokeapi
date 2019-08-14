@@ -28,6 +28,7 @@ dependencies:
 - servant-client
 - text
 - transformers
+- url
 - wai
 
 library:
