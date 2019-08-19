@@ -17,3 +17,8 @@ instance FromJSON Pokemon where
     pkmnName <- p .: "name"
     pkmnLocationAreaEncounters <- p .: "location_area_encounters"
     return Pokemon{..}
+
+data EncounterParams =
+  EncounterParams { pkmn :: String
+                  , game :: String
+                  } deriving (Eq, Show)
