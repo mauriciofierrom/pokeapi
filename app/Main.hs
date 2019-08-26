@@ -21,8 +21,7 @@ main :: IO ()
 main = do
   manager' <- newManager tlsManagerSettings
   let clientEnv = mkClientEnv manager' (BaseUrl Https "pokeapi.co" 443 "/api/v2")
-   in withFile "version.csv" WriteMode $ \h -> do
-     writePokemon versionResource clientEnv h
+   in withFile "version.csv" WriteMode $ \h -> writePokemon versionResource clientEnv h
 
 processTypes :: DamageRelation -> [T.Text]
 processTypes damageRelation = fmap typeResourceName (doubleDamageFrom damageRelation)
