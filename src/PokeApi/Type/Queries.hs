@@ -57,5 +57,5 @@ genDamageRelationAccessor :: (DamageRelation -> [TypeResource])
 genDamageRelationAccessor f manager' type'' = do
   leDamageRelations <- damageRelations manager' type''
   case leDamageRelations of
-    Left err -> return (Left err :: Either ServantError [Type'])
+    Left err -> return (Left err :: Either ClientError [Type'])
     Right damageRelation -> return $ Right $ mapMaybe (getType . typeResourceName) (f damageRelation)

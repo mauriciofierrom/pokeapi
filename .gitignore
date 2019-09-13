@@ -1,3 +1,4 @@
-.stack-work/
-pokeapi.cabal
 *~
+dist
+dist-newstyle
+.ghc.*

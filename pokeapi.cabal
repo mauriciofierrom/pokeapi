@@ -1,0 +1,78 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 8595a9d437d0e8a0ae18635fc2fcf1e5eabcd1be7ea3eac9d2dbdefeda091e2d
+
+name:           pokeapi
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/pokeapi#readme>
+homepage:       https://github.com/githubuser/pokeapi#readme
+bug-reports:    https://github.com/githubuser/pokeapi/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2018 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/pokeapi
+
+library
+  exposed-modules:
+      PokeApi.LocationArea.Types
+      PokeApi.Pokemon.Api
+      PokeApi.Pokemon.Queries
+      PokeApi.Pokemon.Types
+      PokeApi.Resource.Api
+      PokeApi.Resource.Types
+      PokeApi.Type.Api
+      PokeApi.Type.Queries
+      PokeApi.Type.Types
+      PokeApi.Types
+      PokeApi.Version.Types
+  other-modules:
+      Paths_pokeapi
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , aeson                >= 1.4.4 && < 1.5
+    , text                 >= 1.2.3 && < 1.3
+    , transformers         >= 0.5.6 && < 0.6
+    , http-client          >= 0.6.4 && < 0.7
+    , http-client-tls      >= 0.3.5 && < 0.4
+    , servant              >= 0.16.2 && < 0.17
+    , servant-client       >= 0.16 && < 0.17
+    , url                  >= 2.1.3 && < 2.2
+    , wai                  >= 3.2.2 && < 3.3
+  default-language: Haskell2010
+
+test-suite pokeapi-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_pokeapi
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , http-client
+    , http-client-tls
+    , pokeapi
+    , servant
+    , servant-client
+    , text
+    , transformers
+    , url
+    , wai
+  default-language: Haskell2010
