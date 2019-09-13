@@ -3,6 +3,7 @@
 
 module Main where
 
+import Control.Monad.Trans.Reader (runReaderT)
 import Network.HTTP.Client (newManager)
 import Network.HTTP.Client.TLS (tlsManagerSettings)
 import Servant.Client
@@ -13,7 +14,7 @@ import qualified Data.Text as T
 import PokeApi.Type.Types
 import PokeApi.Resource.Api
 import PokeApi.Resource.Types
--- import PokeApi.Pokemon.Queries
+import PokeApi.Type.Queries
 
 import Network.URL
 
@@ -21,8 +22,13 @@ main :: IO ()
 main = do
   manager' <- newManager tlsManagerSettings
   let clientEnv = mkClientEnv manager' (BaseUrl Https "pokeapi.co" 443 "/api/v2")
-   in withFile "version.csv" WriteMode $ \h -> do
-     writePokemon versionResource clientEnv h
+   in do
+     res <- runReaderT (isWeakAgainst Poison Fire) clientEnv
+     case res of
+       Left e -> print e
+       Right val -> print val
+   -- withFile "version.csv" WriteMode $ \h -> do
+   --   writePokemon versionResource clientEnv h
 
 processTypes :: DamageRelation -> [T.Text]
 processTypes damageRelation = fmap typeResourceName (doubleDamageFrom damageRelation)
