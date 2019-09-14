@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module PokeApi.Type.Queries
   ( effectiveAgainst
   , isEffectiveAgainst
@@ -38,21 +36,20 @@ isEffectiveAgainst typeCriteria typeCriteria' = do
   doubleDamagers <- effectiveAgainst typeCriteria
   return $ elem typeCriteria' doubleDamagers
 
-pokemonType :: Type' -> PokeApi (ClientResponse PokemonType)
+pokemonType :: Type' -> PokeApi PokemonType
 pokemonType type'' = do
   clientEnv <- ask
-  liftIO $ runClientM (type' $ getTypeName type'') clientEnv
+  e <- liftIO $ runClientM (type' $ getTypeName type'') clientEnv
+  (lift . except) e
 
-damageRelations :: Type' -> PokeApi (ClientResponse DamageRelation)
+damageRelations :: Type' -> PokeApi DamageRelation
 damageRelations type'' = do
   leType <- pokemonType type''
-  return $ fmap typeDamageRelations leType
+  return $ typeDamageRelations leType
 
 genDamageRelationAccessor :: (DamageRelation -> [TypeResource])
                           -> Type'
                           -> PokeApi [Type']
 genDamageRelationAccessor f type'' = do
   leDamageRelations <- damageRelations type''
-  case leDamageRelations of
-    Right damageRelation -> lift . except $ Right $ mapMaybe (getType . typeResourceName) (f damageRelation)
-    _ -> return []
+  lift . except $ Right $ mapMaybe (getType . typeResourceName) (f leDamageRelations)

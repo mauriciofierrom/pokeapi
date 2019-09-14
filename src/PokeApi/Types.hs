@@ -11,7 +11,6 @@ import Servant.Client (ClientError, ClientEnv)
 import PokeApi.Resource.Types (Resource)
 
 type PokeApi = ReaderT ClientEnv (ExceptT ClientError IO)
-type ClientResponse a = Either ClientError a
 
 data Name =
   Name { name :: String
