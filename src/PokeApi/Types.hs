@@ -9,9 +9,8 @@ import Servant.Client (ClientError, ClientEnv)
 
 import PokeApi.Resource.Types (Resource)
 
--- type PokeApi a = ReaderT ClientEnv (ExceptT ClientError IO) a
-type PokeApi a = ReaderT ClientEnv IO (Either ClientError a)
--- newtype PokeApi a = PokeApi { runPokeApi :: ReaderT ClientEnv IO (Either ClientError a) }
+type PokeApi = ReaderT ClientEnv IO
+type ClientResponse a = Either ClientError a
 
 data Name =
   Name { name :: String

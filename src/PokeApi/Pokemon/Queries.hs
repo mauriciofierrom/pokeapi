@@ -10,12 +10,12 @@ import PokeApi.Types
 import PokeApi.Resource.Types
 import PokeApi.Resource.Api
 
-pokemonEncounters :: String -> PokeApi [EncounterResource]
+pokemonEncounters :: String -> PokeApi (ClientResponse [EncounterResource])
 pokemonEncounters pkmnName = do
   env <- ask
   liftIO $ runClientM (pokemonEncounterByName pkmnName) env
 
-pokemonEncounterByGame :: String -> String -> PokeApi [String]
+pokemonEncounterByGame :: String -> String -> PokeApi (ClientResponse [String])
 pokemonEncounterByGame pkmnName versionName =
   pokemonEncounters pkmnName >>= \case
     Left err -> return (Left err)

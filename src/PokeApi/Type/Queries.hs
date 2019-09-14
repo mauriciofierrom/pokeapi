@@ -17,38 +17,38 @@ import PokeApi.Type.Api
 
 
 -- |Returns a list of 'Type's the criteria is strong against
-effectiveAgainst :: Type' -> PokeApi [Type']
+effectiveAgainst :: Type' -> PokeApi (ClientResponse [Type'])
 effectiveAgainst = genDamageRelationAccessor doubleDamageTo
 
 -- |Returns a list of 'Type's the criteria is weak against
-weakAgainst :: Type' -> PokeApi [Type']
+weakAgainst :: Type' -> PokeApi (ClientResponse [Type'])
 weakAgainst = genDamageRelationAccessor doubleDamageFrom
 
 -- |Wether the criteria is weak against the given 'Type'
-isWeakAgainst :: Type' -> Type' -> PokeApi Bool
+isWeakAgainst :: Type' -> Type' -> PokeApi (ClientResponse Bool)
 isWeakAgainst typeCriteria typeCriteria' = do
   doubleDamagers <- weakAgainst typeCriteria
   return $ elem typeCriteria' <$> doubleDamagers
 
 -- |Wether the criteria is effective against the given 'Type'
-isEffectiveAgainst :: Type' -> Type' -> PokeApi Bool
+isEffectiveAgainst :: Type' -> Type' -> PokeApi (ClientResponse Bool)
 isEffectiveAgainst typeCriteria typeCriteria' = do
   doubleDamagers <- effectiveAgainst typeCriteria
   return $ elem typeCriteria' <$> doubleDamagers
 
-pokemonType :: Type' -> PokeApi PokemonType
+pokemonType :: Type' -> PokeApi (ClientResponse PokemonType)
 pokemonType type'' = do
   clientEnv <- ask
   liftIO $ runClientM (type' $ getTypeName type'') clientEnv
 
-damageRelations :: Type' -> PokeApi DamageRelation
+damageRelations :: Type' -> PokeApi (ClientResponse DamageRelation)
 damageRelations type'' = do
   leType <- pokemonType type''
   return $ fmap typeDamageRelations leType
 
 genDamageRelationAccessor :: (DamageRelation -> [TypeResource])
                           -> Type'
-                          -> PokeApi [Type']
+                          -> PokeApi (ClientResponse [Type'])
 genDamageRelationAccessor f type'' = do
   leDamageRelations <- damageRelations type''
   case leDamageRelations of
