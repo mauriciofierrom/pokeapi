@@ -4,6 +4,7 @@
 module Main where
 
 import Control.Monad.Trans.Reader (runReaderT)
+import Control.Monad.Trans.Except (runExceptT)
 import Network.HTTP.Client (newManager)
 import Network.HTTP.Client.TLS (tlsManagerSettings)
 import Servant.Client
@@ -23,7 +24,7 @@ main = do
   manager' <- newManager tlsManagerSettings
   let clientEnv = mkClientEnv manager' (BaseUrl Https "pokeapi.co" 443 "/api/v2")
    in do
-     res <- runReaderT (isWeakAgainst Poison Fire) clientEnv
+     res <- runExceptT $ runReaderT (isWeakAgainst Poison Fire) clientEnv
      case res of
        Left e -> print e
        Right val -> print val

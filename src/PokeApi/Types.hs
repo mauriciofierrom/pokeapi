@@ -3,13 +3,14 @@
 module PokeApi.Types where
 
 import Control.Monad.Trans.Reader (ReaderT)
+import Control.Monad.Trans.Except (ExceptT)
 import Data.Aeson (FromJSON)
 import GHC.Generics
 import Servant.Client (ClientError, ClientEnv)
 
 import PokeApi.Resource.Types (Resource)
 
-type PokeApi = ReaderT ClientEnv IO
+type PokeApi = ReaderT ClientEnv (ExceptT ClientError IO)
 type ClientResponse a = Either ClientError a
 
 data Name =
