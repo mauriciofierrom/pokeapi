@@ -1,19 +1,12 @@
 cabal-version: 1.12
-
--- This file has been generated from package.yaml by hpack version 0.31.2.
---
--- see: https://github.com/sol/hpack
---
--- hash: 8595a9d437d0e8a0ae18635fc2fcf1e5eabcd1be7ea3eac9d2dbdefeda091e2d
-
 name:           pokeapi
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/pokeapi#readme>
-homepage:       https://github.com/githubuser/pokeapi#readme
-bug-reports:    https://github.com/githubuser/pokeapi/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2018 Author name here
+description:    A basic PokeApi client for Haskell.
+homepage:       https://github.com/mauriciofierrom/hpokeapi#readme
+bug-reports:    https://github.com/mauriciofierrom/hpokeapi/issues
+author:         Mauricio Fierro
+maintainer:     mauriciofierrom@gmail.com
+copyright:      2019 Mauricio Fierro
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -23,7 +16,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/pokeapi
+  location: https://github.com/mauriciofierrom/hpokeapi
 
 library
   exposed-modules:

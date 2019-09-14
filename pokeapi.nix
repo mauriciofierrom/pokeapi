@@ -13,6 +13,6 @@ mkDerivation {
     aeson base http-client http-client-tls servant servant-client text
     transformers url wai
   ];
-  homepage = "https://github.com/githubuser/pokeapi#readme";
+  homepage = "https://github.com/mauriciofierrom/hpokeapi#readme";
   license = stdenv.lib.licenses.bsd3;
 }
