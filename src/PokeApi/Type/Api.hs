@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 
-module PokeApi.Type.Api where
+module PokeApi.Type.Api (type') where
 
 import Data.Proxy (Proxy(..))
 import Servant.API ((:>), Capture, Get, JSON)

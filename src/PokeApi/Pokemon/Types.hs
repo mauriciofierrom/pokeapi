@@ -1,9 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module PokeApi.Pokemon.Types where
+module PokeApi.Pokemon.Types 
+  ( EncounterParams(..)
+  , Pokemon(..) 
+  ) where
 
-import Data.Aeson
+import Data.Aeson (parseJSON, withObject, FromJSON, (.:))
 
 data Pokemon =
   Pokemon { pkmnId :: Int

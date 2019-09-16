@@ -9,7 +9,7 @@ module PokeApi.Resource.Api
   ) where
 
 import Data.Proxy (Proxy(..))
-import Servant.API -- ((:>), :<|>, Capture, Get, JSON, QueryParam)
+import Servant.API ((:>), (:<|>)(..), Capture, Get, JSON, QueryParam)
 import Servant.Client (client, ClientM)
 
 import PokeApi.Resource.Types

@@ -1,28 +1,40 @@
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module PokeApi.Resource.Types where
+module PokeApi.Resource.Types
+  ( EncounterResource(..)
+  , PokemonResource(..)
+  , Resource(..)
+  , VersionEncounterDetail(..)
+  ) where
 
-import Data.Aeson (FromJSON, parseJSON, withObject, (.:))
-import GHC.Generics
+import Data.Aeson (parseJSON, withObject, FromJSON, (.:))
 
 data Resource =
-  Resource { name :: String
-           , url :: String
-           } deriving (Eq, Show, Generic)
+  Resource { resourceName :: String
+           , resourceUrl :: String
+           } deriving (Eq, Show)
 
-instance FromJSON Resource
+instance FromJSON Resource where
+  parseJSON = withObject "resource" $ \r -> do
+    resourceName <- r .: "name"
+    resourceUrl <- r .: "url"
+    return Resource{..}
 
 data PokemonResource =
-  PokemonResource { count :: Int
-                  , next :: Maybe String
-                  , previous :: Maybe String
-                  , results :: [Resource]
-                  } deriving (Eq, Show, Generic)
+  PokemonResource { prCount :: Int
+                  , prNext :: Maybe String
+                  , prPrevious :: Maybe String
+                  , prResults :: [Resource]
+                  } deriving (Eq, Show)
 
-instance FromJSON PokemonResource
-
+instance FromJSON PokemonResource where
+  parseJSON = withObject "pokemonResource" $ \pr -> do
+    prCount <- pr .: "count"
+    prNext <- pr .: "next"
+    prPrevious <- pr .: "previous"
+    prResults <- pr .: "results"
+    return PokemonResource{..}
 
 data VersionEncounterDetail =
   VersionEncounterDetail { vedVersion :: Resource
@@ -39,7 +51,7 @@ instance FromJSON VersionEncounterDetail where
 data EncounterResource =
   EncounterResource { locationArea :: Resource
                     , versionDetails :: [VersionEncounterDetail]
-                    } deriving (Eq, Show, Generic)
+                    } deriving (Eq, Show)
 
 instance FromJSON EncounterResource where
   parseJSON = withObject "encounter_resource" $ \er -> do

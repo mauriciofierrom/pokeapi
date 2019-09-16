@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module PokeApi.Version.Types where
+module PokeApi.Version.Types (Version(..)) where
 
 import Data.Aeson (FromJSON, withObject, parseJSON, (.:))
 

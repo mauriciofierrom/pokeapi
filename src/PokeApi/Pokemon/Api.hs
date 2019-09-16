@@ -1,10 +1,13 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 
-module PokeApi.Pokemon.Api where
+module PokeApi.Pokemon.Api 
+  ( pokemonByName
+  , pokemonById
+  ) where
 
-import Servant.API
-import Servant.Client
+import Servant.API (Capture, Get, JSON, (:<|>)(..), (:>))
+import Servant.Client (client, ClientM)
 import Data.Proxy (Proxy(..))
 
 import PokeApi.Pokemon.Types

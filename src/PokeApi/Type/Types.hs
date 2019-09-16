@@ -1,21 +1,25 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric     #-}
 
-module PokeApi.Type.Types where
+module PokeApi.Type.Types 
+  ( getTypeName
+  , getType
+  , DamageRelation(..)
+  , PokemonType(..)
+  , Type'(..)
+  , TypeResource(..))where
 
 import Data.Aeson ((.:), parseJSON, FromJSON, withObject)
-import GHC.Generics (Generic)
 
 import qualified Data.Text as T
 
 data TypeResource = TypeResource { typeResourceName :: !T.Text
-                                 , typeResourceUrl  :: !T.Text }
-                                 deriving (Show, Generic)
+                                 , typeResourceUrl  :: !T.Text
+                                 } deriving (Eq, Show)
 
 instance FromJSON TypeResource where
-  parseJSON = withObject "type_resource" $ \t -> TypeResource
-    <$> t .: "name"
-    <*> t .: "url"
+  parseJSON = withObject "type_resource" $ \t ->
+    TypeResource <$> t .: "name"
+                 <*> t .: "url"
 
 data DamageRelation =
   DamageRelation { noDamageTo :: [TypeResource]
@@ -23,22 +27,22 @@ data DamageRelation =
                  , doubleDamageTo :: [TypeResource]
                  , noDamageFrom :: [TypeResource]
                  , halfDamageFrom :: [TypeResource]
-                 , doubleDamageFrom :: [TypeResource] }
-                                     deriving (Show, Generic)
+                 , doubleDamageFrom :: [TypeResource]
+                 } deriving (Eq, Show)
 
 instance FromJSON DamageRelation where
-  parseJSON = withObject "damage_relations" $ \d -> DamageRelation
-    <$> d .: "no_damage_to"
-    <*> d .: "half_damage_to"
-    <*> d .: "double_damage_to"
-    <*> d .: "no_damage_from"
-    <*> d .: "half_damage_from"
-    <*> d .: "double_damage_from"
+  parseJSON = withObject "damage_relations" $ \d ->
+    DamageRelation <$> d .: "no_damage_to"
+                   <*> d .: "half_damage_to"
+                   <*> d .: "double_damage_to"
+                   <*> d .: "no_damage_from"
+                   <*> d .: "half_damage_from"
+                   <*> d .: "double_damage_from"
 
 data PokemonType =
   PokemonType { typeName :: !T.Text
-              , typeDamageRelations :: DamageRelation }
-                               deriving (Show, Generic)
+              , typeDamageRelations :: DamageRelation 
+              } deriving (Eq, Show)
 
 instance FromJSON PokemonType where
   parseJSON = withObject "pokemon_type" $ \p -> PokemonType

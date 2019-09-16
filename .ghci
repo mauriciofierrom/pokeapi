@@ -1,3 +1,3 @@
 :set -fwarn-unused-binds -fwarn-unused-imports
 :set -isrc
-:load src/PokeApi/Type/Queries.hs
+:load src/PokeApi/Version/Types.hs

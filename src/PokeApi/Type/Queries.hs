@@ -15,7 +15,6 @@ import PokeApi.Types
 import PokeApi.Type.Types
 import PokeApi.Type.Api
 
-
 -- |Returns a list of 'Type's the criteria is strong against
 effectiveAgainst :: Type' -> PokeApi [Type']
 effectiveAgainst = genDamageRelationAccessor doubleDamageTo
