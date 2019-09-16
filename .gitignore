@@ -1,4 +1,8 @@
 *~
 dist
-dist-newstyle
+dist-*
+.cabal-sandbox/
+.ghc.environment.*
+cabal.project.local
+cabal.sandbox.config
 .ghc.*
