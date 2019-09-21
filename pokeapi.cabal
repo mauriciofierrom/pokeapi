@@ -20,6 +20,7 @@ source-repository head
 
 library
   exposed-modules:
+      PokeApi.Common
       PokeApi.LocationArea
       PokeApi.Pokemon
       PokeApi.Resource
@@ -36,7 +37,6 @@ library
       PokeApi.Type.Api
       PokeApi.Type.Queries
       PokeApi.Type.Types
-      PokeApi.Common
       PokeApi.Version.Types
   hs-source-dirs:
       src
