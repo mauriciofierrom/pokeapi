@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 
-module PokeApi.Pokemon.Api 
+module PokeApi.Pokemon.Api
   ( pokemonByName
   , pokemonById
   ) where

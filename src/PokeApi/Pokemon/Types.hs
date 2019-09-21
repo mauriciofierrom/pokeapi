@@ -1,9 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module PokeApi.Pokemon.Types 
+module PokeApi.Pokemon.Types
   ( EncounterParams(..)
-  , Pokemon(..) 
+  , Pokemon(..)
   ) where
 
 import Data.Aeson (parseJSON, withObject, FromJSON, (.:))

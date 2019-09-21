@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module PokeApi.Type.Types 
+module PokeApi.Type.Types
   ( getTypeName
   , getType
   , DamageRelation(..)
@@ -41,7 +41,7 @@ instance FromJSON DamageRelation where
 
 data PokemonType =
   PokemonType { typeName :: !T.Text
-              , typeDamageRelations :: DamageRelation 
+              , typeDamageRelations :: DamageRelation
               } deriving (Eq, Show)
 
 instance FromJSON PokemonType where
