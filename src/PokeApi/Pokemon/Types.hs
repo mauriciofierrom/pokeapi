@@ -4,14 +4,20 @@
 module PokeApi.Pokemon.Types
   ( EncounterParams(..)
   , Pokemon(..)
+  , PokemonName
+  , PokemonGame
   ) where
 
 import Data.Aeson (parseJSON, withObject, FromJSON, (.:))
 
+-- | Pokemon type.
 data Pokemon =
   Pokemon { pkmnId :: Int
-          , pkmnName :: String
+            -- ^ Identifier of this resource.
+          , pkmnName :: PokemonName
+            -- ^ The Pokemon name.
           , pkmnLocationAreaEncounters :: String
+            -- ^ The LocationAreaEncounter resource url.
           } deriving (Eq, Show)
 
 instance FromJSON Pokemon where
@@ -21,7 +27,13 @@ instance FromJSON Pokemon where
     pkmnLocationAreaEncounters <- p .: "location_area_encounters"
     return Pokemon{..}
 
+type PokemonName = String
+type PokemonGame = String
+
+-- | Parameters for querying an encounter.
 data EncounterParams =
-  EncounterParams { pkmn :: String
-                  , game :: String
+  EncounterParams { name :: PokemonName
+                    -- ^ The name of the Pokemon.
+                  , game :: PokemonGame
+                    -- ^ The name of the PokemonGame.
                   } deriving (Eq, Show)

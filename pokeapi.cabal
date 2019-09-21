@@ -20,6 +20,13 @@ source-repository head
 
 library
   exposed-modules:
+      PokeApi.LocationArea
+      PokeApi.Pokemon
+      PokeApi.Resource
+      PokeApi.Type
+      PokeApi.Version
+  other-modules:
+      Paths_pokeapi
       PokeApi.LocationArea.Types
       PokeApi.Pokemon.Api
       PokeApi.Pokemon.Queries
@@ -29,10 +36,8 @@ library
       PokeApi.Type.Api
       PokeApi.Type.Queries
       PokeApi.Type.Types
-      PokeApi.Types
+      PokeApi.Common
       PokeApi.Version.Types
-  other-modules:
-      Paths_pokeapi
   hs-source-dirs:
       src
   ghc-options: -Wall

@@ -7,6 +7,7 @@ import Data.Aeson (FromJSON, withObject, parseJSON, (.:))
 
 import PokeApi.Resource.Types
 
+-- | Game version type.
 data Version =
   Version { versionName :: String
           , versionNames :: [String]

@@ -8,17 +8,19 @@ import Control.Monad.Trans.Reader (ask)
 import Control.Monad.Trans.Except (except)
 import Servant.Client (runClientM)
 
-import PokeApi.Types
+import PokeApi.Common
 import PokeApi.Resource.Types
 import PokeApi.Resource.Api
+import PokeApi.Pokemon.Types (PokemonGame, PokemonName)
 
-pokemonEncounters :: String -> PokeApi [EncounterResource]
+pokemonEncounters :: PokemonName -> PokeApi [EncounterResource]
 pokemonEncounters pkmnName = do
   env <- ask
   e <- liftIO $ runClientM (pokemonEncounterByName pkmnName) env
   (lift . except) e
 
-pokemonEncounterByGame :: String -> String -> PokeApi [String]
+-- | Get a list of the possible Pokemon encounters in a game.
+pokemonEncounterByGame :: PokemonName -> PokemonGame -> PokeApi [String]
 pokemonEncounterByGame pkmnName versionName =
   encResourceToString <$> pokemonEncounters pkmnName
     where
